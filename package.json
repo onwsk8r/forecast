@@ -1,0 +1,31 @@
+{
+  "name": "geohaze",
+  "version": "0.0.0",
+  "description": "All your Wx Needs",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "browser-sync": "~2.8.2",
+    "del": "~1.2.0",
+    "gulp": "~3.9.0",
+    "gulp-concat": "~2.6.0",
+    "gulp-less": "~3.0.3",
+    "gulp-sourcemaps": "~1.5.2"
+  },
+  "devDependencies": {
+    "gulp": "~3.9.0",
+    "gulp-sourcemaps": "~1.5.2",
+    "gulp-concat": "~2.6.0",
+    "del": "~1.2.0",
+    "gulp-less": "~3.0.3",
+    "browser-sync": "~2.8.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "geohaze"
+  },
+  "author": "Brian Hazeltine",
+  "license": "BSD-2-Clause"
+}
