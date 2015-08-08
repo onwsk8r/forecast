@@ -4,9 +4,11 @@ var less = require('gulp-less');
 var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
 var del = require('del');
+var changed = require('gulp-changed');
+var order = require('gulp-order');
 
 gulp.task('default', ['clean'], function () {
-    gulp.start('less', 'js');
+    gulp.start('less', 'js', 'partial');
 
     browserSync({
         server: {
@@ -16,29 +18,46 @@ gulp.task('default', ['clean'], function () {
 
     gulp.watch('less/**/*.less', ['less']);
     gulp.watch('js/**/*.js', ['js']);
+    gulp.watch('partial/**/*.html', ['partial']);
 });
 
 gulp.task('less', function () {
-    return gulp.src('./less/**/*.less')
+    return gulp.src('less/**/*.less')
         .pipe(sourcemaps.init())
         .pipe(less({
             filename: 'style.css'
         }))
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('./public'))
+        .pipe(gulp.dest('public'))
         .pipe(browserSync.reload({
             stream: true
         }));
 });
 
 gulp.task('js', function () {
-    return gulp.src('src/scripts/**/*.js')
+    return gulp.src('js/**/*.js')
+        .pipe(order([
+            'js/*.module.js',
+            'js/warning.config.js',
+            'js/**/*.js',
+
+        ], { base: './' }))
         .pipe(concat('script.js'))
         .pipe(sourcemaps.init({
             loadMaps: true
         }))
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('./public'))
+        .pipe(gulp.dest('public'))
+        .pipe(browserSync.reload({
+            stream: true
+        }));
+});
+
+gulp.task('partial', function () {
+    var dest = 'public/partial';
+    return gulp.src('partial/**/*.html')
+        .pipe(changed(dest))
+        .pipe(gulp.dest(dest))
         .pipe(browserSync.reload({
             stream: true
         }));

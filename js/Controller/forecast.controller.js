@@ -3,11 +3,11 @@
 
     angular
         .module('warning')
-        .controller('forecastController', forecastController);
+        .controller('ForecastController', ForecastController);
 
-    forecastController.$inject = ['$http', '$scope'];
+    ForecastController.$inject = ['$http', '$scope'];
 
-    function forecastController($http, $scope) {
+    function ForecastController($http, $scope) {
 
     }
 })();

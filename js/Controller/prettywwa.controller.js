@@ -19,7 +19,7 @@
                 },
                 serverType: 'geoserver'
             })
-        })
+        });
 
         var warning = new ol.layer.Tile({
             opacity: 0.8,
@@ -33,7 +33,7 @@
                 },
                 serverType: 'geoserver'
             })
-        })
+        });
 
         var map = new ol.Map({
             layers: [srtm, warning],
