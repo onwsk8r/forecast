@@ -8,7 +8,7 @@
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
     function config($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise('/forecast');
+        $urlRouterProvider.otherwise('/map');
 
         $stateProvider
             .state('wwa', {
@@ -16,10 +16,10 @@
                 templateUrl: 'partial/wfowwa.html',
                 controller: 'oldwwaController'
             })
-            .state('prettywwa', {
-                url: '/prettywwa',
-                templateUrl: 'partial/prettywwa.html',
-                controller: 'prettywwaController'
+            .state('map', {
+                url: '/map',
+                templateUrl: 'partial/map.html',
+                controller: 'mapController'
             })
             .state('forecast', {
                 url: '/forecast',

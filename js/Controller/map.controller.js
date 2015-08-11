@@ -3,11 +3,11 @@
 
     angular
         .module('warning')
-        .controller('prettywwaController', prettywwaController);
+        .controller('mapController', mapController);
 
     prettywwaController.$inject = ['$http', '$scope'];
 
-    function prettywwaController($http, $scope) {
+    function mapController($http, $scope) {
         var srtm = new ol.layer.Tile({
             source: new ol.source.TileWMS({
                // url: 'https://d1zy9frnzrb6ns.cloudfront.net/geoserver/wms',
@@ -15,7 +15,8 @@
                 params: {
                     'LAYERS': 'srtm:bw-comp',
                     'TILED': true,
-                    // 'time': '2015-07-21T04:19:00.000Z'
+                    'SRS': 'EPSG:3857',
+                    format: 'image/jpeg'
                 },
                 serverType: 'geoserver'
             })
@@ -27,9 +28,9 @@
                // url: 'https://d1zy9frnzrb6ns.cloudfront.net/geoserver/wms',
                 url: 'http://172.16.24.10:8080/geoserver/wms',
                 params: {
-                    'LAYERS': 'noaa:warning_wms',
+                    'LAYERS': 'noaa:Temperature_surface',
                     'TILED': true,
-                    // 'time': '2015-07-21T04:19:00.000Z'
+                    'time': '2015-08-10T12:00:00.000Z'
                 },
                 serverType: 'geoserver'
             })

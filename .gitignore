@@ -2,3 +2,4 @@ node_modules
 public/style.css
 public/partial
 public/script.js
+!public/partial/.gitkeep
