@@ -22,7 +22,7 @@ gulp.task('default', ['clean'], function () {
 });
 
 gulp.task('less', function () {
-    return gulp.src('less/**/*.less')
+    return gulp.src('less/style.less')
         .pipe(sourcemaps.init())
         .pipe(less({
             filename: 'style.css'
