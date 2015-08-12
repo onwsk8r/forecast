@@ -56,7 +56,7 @@
                 serverType: 'geoserver'
             })
         });
-        $scope.warningMap = new ol.Map({
+        var map = new ol.Map({
             layers: [srtm, warning],
             target: 'map',
             view: new ol.View({
