@@ -2,6 +2,7 @@
     'use strict';
     
     angular.module('warning',[
-        'ui.router'
+        'ui.router',
+        'ui.bootstrap-slider'
     ]);
 })();

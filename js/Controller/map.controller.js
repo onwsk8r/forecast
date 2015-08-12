@@ -21,21 +21,59 @@
             // called asynchronously if an error occurs
             // or server returns response with an error status.
         });
-        
-        $scope.changeLayer = function(idx) {
+
+        $scope.changeLayer = function (idx) {
             var src = warning.getSource();
-            console.log(src,$scope.layers[idx].Name)
-            src.updateParams({'LAYERS': $scope.layers[idx].Name});
-            console.log(src);
+            var layer = $scope.layers[idx];
+            $scope.activeLayer = idx;
+            src.updateParams({
+                'LAYERS': layer.Name
+            });
+
+            if (layer.Dimension[0].name == 'time') {
+                $scope.hasTime = true;
+                getTimes(layer.Dimension[0])
+            } else {
+                $scope.hasTime = false;
+            }
         }
 
-        var pushLayers = function(data) {
+        var pushLayers = function (data) {
             // TODO make namespaces a thing
             angular.forEach(data, function (value) {
                 this.push(value);
             }, $scope.layers);
         }
 
+        //**** DATE STUFF ****
+        $scope.hasTime = false;
+        $scope.dateValue = null;
+        $scope.dates = [];
+        $scope.numTimes = 0;
+        var getTimes = function (dateDimension) {
+            $scope.dates = dateDimension.values.split(',');
+            $scope.numTimes = ($scope.dates.length - 1);
+            $scope.dateValue = $scope.dates.indexOf(dateDimension.default)
+        }
+        $scope.dateFormatter = function (idx) {
+            return $scope.dates[idx];
+        }
+        $scope.$watch(function (scope) {
+                return scope.dateValue
+            },
+            function (newVal, oldVal) {
+                if (newVal === oldVal) {
+                    return;
+                }
+                var src = warning.getSource();
+                var layer = $scope.layers[$scope.activeLayer]
+                src.updateParams({
+                    'time': $scope.dates[newVal]
+                });
+            }
+        );
+
+        //**** MAP LAYERS ****
         var srtm = new ol.layer.Tile({
             source: new ol.source.TileWMS({
                 // url: 'https://d1zy9frnzrb6ns.cloudfront.net/geoserver/wms',
@@ -56,10 +94,8 @@
                 // url: 'https://d1zy9frnzrb6ns.cloudfront.net/geoserver/wms',
                 url: 'http://172.16.24.10:8080/geoserver/wms',
                 params: {
-                    'LAYERS': 'ndfd:Temperature_surface',
                     'TILED': true,
-                    'format': "image/jpeg"
-                        //'time': '2015-08-10T12:00:00.000Z'
+                    'format': "image/jpeg",
                 },
                 serverType: 'geoserver'
             })

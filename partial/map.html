@@ -6,6 +6,7 @@
                 <li class="list-group-item" ng-repeat="layer in layers track by $index" ng-click="changeLayer($index)">{{layer.Title}}</li>
         </div>
         <div class="col-sm-10">
+            <slider ng-model="dateValue" formatter="dateFormatter" min="0" max="numTimes"></slider>
             <div id="map"></div>
         </div>
     </div>
