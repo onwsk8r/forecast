@@ -9,19 +9,27 @@
 
     function mapController($http, $scope) {
         $scope.layers = [];
+        $scope.activeLayer = null;
 
         $http.get('http://172.16.24.10:8080/geoserver/ndfd/ows?service=wms&version=1.3.0&request=GetCapabilities').
         then(function (response) {
             var parser = new ol.format.WMSCapabilities();
             var result = parser.read(response.data);
-            $scope.pushLayers(result.Capability.Layer.Layer);
+            pushLayers(result.Capability.Layer.Layer);
             console.log($scope.layers);
         }, function (response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
         });
+        
+        $scope.changeLayer = function(idx) {
+            var src = warning.getSource();
+            console.log(src,$scope.layers[idx].Name)
+            src.updateParams({'LAYERS': $scope.layers[idx].Name});
+            console.log(src);
+        }
 
-        $scope.pushLayers = function(data) {
+        var pushLayers = function(data) {
             // TODO make namespaces a thing
             angular.forEach(data, function (value) {
                 this.push(value);
