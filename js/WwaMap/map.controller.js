@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('warning')
+        .module('wx.wwamap')
         .controller('mapController', mapController);
 
     mapController.$inject = ['$http', '$scope'];

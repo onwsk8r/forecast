@@ -1,8 +1,7 @@
 (function() {
     'use strict';
     
-    angular.module('warning',[
-        'ui.router',
+    angular.module('wx.wwamap', [
         'ui.bootstrap-slider'
     ]);
 })();

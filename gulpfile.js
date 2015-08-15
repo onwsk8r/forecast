@@ -24,9 +24,7 @@ gulp.task('default', ['clean'], function () {
 gulp.task('less', function () {
     return gulp.src('less/style.less')
         .pipe(sourcemaps.init())
-        .pipe(less({
-            filename: 'style.css'
-        }))
+        .pipe(less())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('public'))
         .pipe(browserSync.reload({
@@ -38,7 +36,9 @@ gulp.task('js', function () {
     return gulp.src('js/**/*.js')
         .pipe(order([
             'js/*.module.js',
-            'js/warning.config.js',
+            'js/*.config.js',
+            'js/**/*.module.js',
+            'js/**/*.config.js',
             'js/**/*.js',
 
         ], { base: './' }))

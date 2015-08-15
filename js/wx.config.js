@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('warning')
+        .module('wx')
         .config(config);
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
