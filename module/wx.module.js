@@ -3,6 +3,7 @@
     
     angular.module('wx', [
         'ui.router',
-        'wx.wwamap'
+        'wx.wwamap',
+        'wx.forecast'
     ]);
 })();
