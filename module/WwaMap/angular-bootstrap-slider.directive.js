@@ -1,3 +1,4 @@
+(function() {
 //https://raw.githubusercontent.com/seiyria/angular-bootstrap-slider
 angular.module('ui.bootstrap-slider', [])
     .directive('slider', ['$parse', '$timeout', '$rootScope', function ($parse, $timeout, $rootScope) {
@@ -205,3 +206,4 @@ angular.module('ui.bootstrap-slider', [])
             }
         };
     }]);
+})();
