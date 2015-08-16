@@ -1,0 +1,57 @@
+<!-- http://172.16.24.10:8080/geoserver/ndfd/wms?service=WMS&version=1.1.0&request=GetFeatureInfo&layers=ndfd:Temperature_surface&styles=&bbox=-120,20,-70,50&width=768&height=493&srs=EPSG:4326&query_layers=ndfd:Temperature_surface&x=50&y=50&info_format=application/json&time=2015-08-08 -->
+<!-- http://172.16.24.10:8080/geoserver/ndfd/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ndfd:wx&outputFormat=application/json&propertyName=wx,validTime&exceptions=text/javascript&format_options=id_policy:false&sortBy=validTime&cql_filter=CONTAINS%28geom,%20POINT%20%28-93%2039%29%29 -->
+<!-- http://www.weather.gov/forecast-icons -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 hidden-sm">
+            <div style="float: left; clear: none" ng-repeat="n in [1, 2, 3, 4, 5, 6, 7]">
+                Tomorrow<br>
+                94/76<br>
+                <img src="http://www.weather.gov/images/nws/newicons/nskc.png" width="100px" class="img-rounded" alt="Clear">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <!-- Current Obs -->
+        <div class="col-md-4 pull-right" id="obs" style="height: 400px">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Current Observations</h3>
+                </div>
+                <div class="panel-body">
+                    Panel content
+                </div>
+            </div>
+        </div>
+
+        <!-- Forecast -->
+        <div class="col-md-8" id="forecast" style="height: 1300px">
+            <div class="panel panel-default">
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="n in [1, 2, 3, 4, 5, 6, 7]">
+                        <h3>Tonight</h3>
+                        <img src="http://www.weather.gov/images/nws/newicons/nskc.png" width="100px" class="img-rounded" alt="Clear">
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Map -->
+        <div class="col-md-4" id="hwg" style="height: 400px">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    Map
+                </div>
+            </div>
+        </div>
+
+        <!-- Hourly Weather Graph -->
+        <div class="col-md-4" id="map" style="height: 400px">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    HWG
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

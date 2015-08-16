@@ -13,17 +13,17 @@
         $stateProvider
             .state('wwa', {
                 url: '/wwa',
-                templateUrl: 'partial/wfowwa.html',
+                templateUrl: 'WwaMap/wfowwa.html',
                 controller: 'oldwwaController'
             })
             .state('map', {
                 url: '/map',
-                templateUrl: 'partial/map.html',
+                templateUrl: 'WwaMap/map.html',
                 controller: 'mapController'
             })
             .state('forecast', {
                 url: '/forecast',
-                templateUrl: 'partial/forecast.html',
+                templateUrl: 'Forecast/forecast.html',
                 controller: 'ForecastController'
             });
     }

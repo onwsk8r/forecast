@@ -19,7 +19,8 @@
     "gulp-less": "~3.0.3",
     "browser-sync": "~2.8.2",
     "gulp-changed": "~1.3.0",
-    "gulp-order": "~1.1.1"
+    "gulp-order": "~1.1.1",
+    "merge-stream": "~1.0.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

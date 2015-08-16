@@ -6,6 +6,7 @@ var concat = require('gulp-concat');
 var del = require('del');
 var changed = require('gulp-changed');
 var order = require('gulp-order');
+var merge = require('merge-stream');
 
 gulp.task('default', ['clean'], function () {
     gulp.start('less', 'js', 'partial');
@@ -16,13 +17,14 @@ gulp.task('default', ['clean'], function () {
         }
     });
 
-    gulp.watch('less/**/*.less', ['less']);
-    gulp.watch('js/**/*.js', ['js']);
-    gulp.watch('partial/**/*.html', ['partial']);
+    gulp.watch('module/**/*.less', ['less']);
+    gulp.watch('lib/**/*.less', ['less']);
+    gulp.watch('module/**/*.js', ['js']);
+    gulp.watch('module/**/*.html', ['partial']);
 });
 
 gulp.task('less', function () {
-    return gulp.src('less/style.less')
+    var theirless = gulp.src('lib/less/bootstrap.less')
         .pipe(sourcemaps.init())
         .pipe(less())
         .pipe(sourcemaps.write())
@@ -30,18 +32,29 @@ gulp.task('less', function () {
         .pipe(browserSync.reload({
             stream: true
         }));
+    
+    var myless = gulp.src('module/**/*.less')
+        .pipe(sourcemaps.init())
+        .pipe(less())
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('public'))
+        .pipe(browserSync.reload({
+            stream: true
+        }));
+    
+    return merge(theirless, myless);
 });
 
 gulp.task('js', function () {
-    return gulp.src('js/**/*.js')
+    return gulp.src('module/**/*.js')
         .pipe(order([
-            'js/*.module.js',
-            'js/*.config.js',
-            'js/**/*.module.js',
-            'js/**/*.config.js',
-            'js/**/*.js',
+            'module/*.module.js',
+            'module/*.config.js',
+            'module/**/*.module.js',
+            'module/**/*.config.js',
+            'module/**/*.js',
 
-        ], { base: './' }))
+        ], { base: '.' }))
         .pipe(concat('script.js'))
         .pipe(sourcemaps.init({
             loadMaps: true
@@ -54,8 +67,8 @@ gulp.task('js', function () {
 });
 
 gulp.task('partial', function () {
-    var dest = 'public/partial';
-    return gulp.src('partial/**/*.html')
+    var dest = 'public';
+    return gulp.src('module/**/*.html')
         .pipe(changed(dest))
         .pipe(gulp.dest(dest))
         .pipe(browserSync.reload({
