@@ -8,7 +8,7 @@
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
     function config($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise('/map');
+        $urlRouterProvider.otherwise('/forecast/point/-94/39');
 
         $stateProvider
             .state('wwa', {
@@ -23,8 +23,25 @@
             })
             .state('forecast', {
                 url: '/forecast',
-                templateUrl: 'Forecast/forecast.html',
-                controller: 'ForecastController'
+                abstract: true,
+                templateUrl: 'Forecast/forecast.html'
+            })
+            .state('forecast.point', {
+                url: '/point/{lon}/{lat}',
+                views: {
+                    'obs': {
+                        templateUrl: 'Forecast/obs.html',
+                        controller: 'obsController'
+                    },
+                    'icons': {
+                        templateUrl: 'Forecast/icons.html',
+                        controller: 'iconsController'
+                    },
+                    'detailed': {
+                        templateUrl: 'Forecast/detailed.html',
+                        controller: 'detailedController'
+                    }
+                }
             });
     }
 })();
